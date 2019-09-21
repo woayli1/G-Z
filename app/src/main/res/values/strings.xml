@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">iPhone MAX Plan</string>
+
+    <string name="main">主页</string>
+    <string name="rules">规则</string>
+    <string name="about">关于</string>
+
+    <string name="data">日期</string>
+    <string name="moneyChange">操作</string>
+    <string name="AllMoney">总金额</string>
+
+    <string name="eat">今天吃了</string>
+    <string name="noEat">今天没吃</string>
+
+    <string name="rule">计划规则\n\n1、本计划从2019年9月16日开始执行。\n2、从第N天开始不吃饭，在第N+3天时，开始累积金额，每天累积30元。
+                \n3、中途不能吃饭，吃了饭后，则记录被打断，清零。\n4、不吃饭是指的不吃晚饭，每天记录且只记录一次。\n5、当天多次不吃饭，只记录一次。
+                \n6、最低提取金额是300元，暂时不设置最高提取限额。\n7、累积金额永久有效，不自动清零。\n8、提取了多少金额，则减少对应金额，不可手动添加金额。
+                \n9、不吃饭期间，允许吃水果、少量零食、喝水，不运行喝饮料。\n10、当父母问起是否吃饭时，需说吃了饭的，或者说吃了一些。\n11、不允许向外泄露本计划。</string>
+
+</resources>
