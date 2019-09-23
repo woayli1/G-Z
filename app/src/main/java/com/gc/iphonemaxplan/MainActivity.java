@@ -18,6 +18,7 @@ import com.gc.iphonemaxplan.Fragment.FragmentMain;
 import com.gc.iphonemaxplan.Fragment.FragmentRules;
 import com.gc.iphonemaxplan.Fragment.MainAdapter;
 import com.gc.iphonemaxplan.Tools.DataHelper;
+import com.gc.iphonemaxplan.Tools.TimeStampManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,9 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
     private Button main;
     private Button rules;
     private Button about;
+
+    public static DataHelper dataHelper;
+    public static TimeStampManager timeStampManager=new TimeStampManager();
 
     public static ArrayList<String> items1 = new ArrayList<>();
     public static ArrayList<String> items2 = new ArrayList<>();
@@ -41,10 +45,7 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DataHelper dataHelper = new DataHelper(this, "Record", null, 1);
-
-        items1 = dataHelper.getAllItem("data_name");
-        items2 = dataHelper.getAllItem("money_name");
+        dataHelper = new DataHelper(this, "Record", null, 1);
 
         bindView();
         initView();

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -31,25 +30,40 @@ public class DataHelper extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList getAllItem(String items) {
+    public ArrayList<String> getAllItem(String items) {
         SQLiteDatabase db = getReadableDatabase();
-        ArrayList<String> itme = new ArrayList<String>();
+        ArrayList<String> itme = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM '" + TABLE_NAME + "' order by data_name DESC;", null);
         while (cursor.moveToNext()) {
             itme.add(cursor.getString(cursor.getColumnIndex(items)));
         }
         cursor.close();
+        db.close();
         return itme;
+    }
+
+    public String getDataName(String temp) {
+        String dataName = null;
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT " + DATA_NAME + " FROM " + TABLE_NAME + " WHERE " + DATA_NAME + " = '" + temp + "';", null);
+        while (cursor.moveToNext()) {
+            dataName = cursor.getString(0);
+        }
+        cursor.close();
+        db.close();
+        return dataName;
     }
 
     public void insertinto(String DATA_NAME, String MONEY_NAME) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("insert into " + TABLE_NAME + " values ('" + DATA_NAME + "','" + MONEY_NAME + "');");
+        db.close();
     }
 
-    public void delete(String DATA_NAME) {
+    public void delete(String data_name) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + this.DATA_NAME + " = '" + DATA_NAME + "';");
+        db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + DATA_NAME + " = '" + data_name + "';");
+        db.close();
     }
 
 }

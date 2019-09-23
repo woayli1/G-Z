@@ -16,14 +16,11 @@ public class ListAdapter extends BaseAdapter {
 
     private Context context;
 
-//    private ArrayList<String> items1 = new ArrayList<>();
-//    private ArrayList<String> items2 = new ArrayList<>();
+    private String TAG = "ListAdapter";
 
-    TextView data;  //日期
-    TextView moneyChange; //金额变化
-    TextView AllMoney; //所有金额
+    private ArrayList<String> AllMoneys = new ArrayList<>();
 
-    public ListAdapter(Context context) {
+    ListAdapter(Context context) {
         this.context = context;
     }
 
@@ -47,13 +44,38 @@ public class ListAdapter extends BaseAdapter {
 
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.fragment_main_listview, null);
-        data = view.findViewById(R.id.data);
-        moneyChange = view.findViewById(R.id.moneyChange);
-        AllMoney = view.findViewById(R.id.AllMoney);
+        //日期
+        TextView data = view.findViewById(R.id.data);
+        //金额变化
+        TextView moneyChange = view.findViewById(R.id.moneyChange);
+        //所有金额
+        TextView allMoney = view.findViewById(R.id.AllMoney);
 
-        data.setText(MainActivity.items1.get(position));
+        countAllMoney(MainActivity.items2);
+        data.setText(MainActivity.timeStampManager.stampToTime(MainActivity.items1.get(position)));
         moneyChange.setText(MainActivity.items2.get(position));
-
+        allMoney.setText(AllMoneys.get(AllMoneys.size() - 1 - position));
         return view;
     }
+
+    private void countAllMoney(ArrayList<String> items) {
+        if (!AllMoneys.isEmpty()) {
+            AllMoneys.clear();
+        }
+        int a = 0;
+        for (int i = items.size() - 1; i >= 0; i--) {
+            if (items.get(i).substring(0, 1).equals("-")) {
+                a = a - 90;
+            } else {
+                a = a + 30;
+            }
+            try {
+                AllMoneys.set(items.size() - 1 - i, String.valueOf(a));
+            } catch (IndexOutOfBoundsException e) {
+                AllMoneys.add(items.size() - 1 - i, String.valueOf(a));
+            }
+        }
+
+    }
+
 }
