@@ -80,10 +80,10 @@ public class FragmentMain extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TextView textView = view.findViewById(R.id.data);
-                TextView textView2 = view.findViewById(R.id.moneyChange);
                 String str = textView.getText().toString();
-                String str2 = textView2.getText().toString();
-                dialog(str, str2);
+//                TextView textView2 = view.findViewById(R.id.moneyChange);
+//                String str2 = textView2.getText().toString();
+                dialog(str);
             }
         });
 
@@ -96,7 +96,7 @@ public class FragmentMain extends Fragment {
             Log.e(TAG, "获取listView对象 err:" + e);
             money = "0";
         }
-        AllMoneys.setText("当前总金额为：\n" + money);
+        AllMoneys.setText(String.format(getResources().getString(R.string.FragmentAbout_current_money), money));
     }
 
     public boolean cheakExist(String value) {
@@ -117,7 +117,7 @@ public class FragmentMain extends Fragment {
         return temp + 86400000 < temp2;
     }
 
-    public void dialog(final String str, final String str2) {
+    public void dialog(final String str) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("确认删除吗？");
         builder.setTitle(str);

@@ -17,4 +17,14 @@
                 \n\t\t6、最低提取金额是300元，暂时不设置最高提取限额。\n\t\t7、累积金额永久有效，不自动清零。\n\t\t8、提取了多少金额，则减少对应金额，不可手动添加金额。
                 \n\t\t9、不吃饭期间，允许吃水果、少量零食、喝水，不运行喝饮料。\n\t\t10、当父母问起是否吃饭时，需说吃了饭的，或者说吃了一些。\n\t\t11、不允许向外泄露本计划。</string>
 
+
+    <!-- FragmentAbout start -->
+    <string name="FragmentAbout_current_version">当前版本号%1$s</string>
+    <string name="FragmentAbout_get_current_version_err">获取版本号错误</string>
+    <!-- FragmentAbout end -->
+
+    <!-- FragmentMain start -->
+    <string name="FragmentAbout_current_money">当前金额为%1$s</string>
+    <!-- FragmentMain end -->
+
 </resources>

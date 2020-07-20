@@ -20,6 +20,7 @@ public class FragmentAbout extends Fragment {
     private TextView fragmentAbout;
 
     private String TAG = "FragmentAbout";
+    PackageManager packageManager;
 
     @Nullable
     @Override
@@ -29,13 +30,18 @@ public class FragmentAbout extends Fragment {
         bindView();
 
         //获取版本号
-        PackageManager packageManager = getActivity().getPackageManager();
-        try {
-            PackageInfo packageInfo = packageManager.getPackageInfo(getActivity().getPackageName(), 0);
-            fragmentAbout.setText("当前版本号：" + packageInfo.versionName);
-        } catch (PackageManager.NameNotFoundException e) {
-            fragmentAbout.setText("获取版本号错误");
-            Log.e(TAG, "获取版本号错误:" + e);
+        if (getActivity() != null) {
+            packageManager = getActivity().getPackageManager();
+            try {
+                PackageInfo packageInfo = packageManager.getPackageInfo(getActivity().getPackageName(), 0);
+                fragmentAbout.setText(String.format(getResources().getString(R.string.FragmentAbout_current_version), packageInfo.versionName));
+            } catch (PackageManager.NameNotFoundException e) {
+                fragmentAbout.setText(R.string.FragmentAbout_get_current_version_err);
+                Log.e(TAG, "获取版本号错误:" + e);
+            }
+        } else {
+            fragmentAbout.setText(R.string.FragmentAbout_get_current_version_err);
+            Log.e(TAG, "getActivity is null");
         }
 
         return view;
