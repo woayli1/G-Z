@@ -6,8 +6,7 @@
     <LinearLayout
         android:id="@+id/mainTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="match_parent"
@@ -32,24 +31,23 @@
 
     </LinearLayout>
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/mainTitle"
         android:id="@+id/mainListView"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:layout_below="@id/mainTitle">
-
-    </ListView>
+        android:layout_height="wrap_content"
+        android:layout_above="@id/mainButton"/>
 
     <LinearLayout
+        android:layout_above="@id/AllMoneys"
         android:id="@+id/mainButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/mainListView"
-        android:gravity="center_horizontal">
+        android:gravity="center">
 
         <Button
             android:id="@+id/eat"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/eat" />
 
@@ -59,18 +57,18 @@
 
         <Button
             android:id="@+id/noEat"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/noEat" />
 
     </LinearLayout>
 
     <TextView
+        android:layout_alignParentBottom="true"
         android:id="@+id/AllMoneys"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/mainButton"
+        android:layout_height="50dp"
         android:gravity="center"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
 </RelativeLayout>

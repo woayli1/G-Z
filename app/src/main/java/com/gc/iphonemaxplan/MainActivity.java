@@ -3,10 +3,6 @@ package com.gc.iphonemaxplan;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,12 +14,15 @@ import com.gc.iphonemaxplan.Fragment.FragmentMain;
 import com.gc.iphonemaxplan.Fragment.FragmentRules;
 import com.gc.iphonemaxplan.Fragment.MainAdapter;
 import com.gc.iphonemaxplan.Tools.DataHelper;
-import com.gc.iphonemaxplan.Tools.TimeStampManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends FragmentActivity implements OnPageChangeListener {
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager.widget.ViewPager;
+
+public class MainActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
 
     private ViewPager mainViewpager;
     private Button main;
@@ -31,10 +30,6 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
     private Button about;
 
     public static DataHelper dataHelper;
-    public static TimeStampManager timeStampManager=new TimeStampManager();
-
-    public static ArrayList<String> items1 = new ArrayList<>();
-    public static ArrayList<String> items2 = new ArrayList<>();
 
     private List<Fragment> frameLayoutList = new ArrayList<>();
 

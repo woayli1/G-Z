@@ -10,6 +10,18 @@ public class TimeStampManager {
 
     private String TAG = "TimeStampManager";
 
+    private TimeStampManager() {
+
+    }
+
+    public static TimeStampManager getInstance() {
+        return TimeStampManagerHolder.timeStamp;
+    }
+
+    private static class TimeStampManagerHolder {
+        private static final TimeStampManager timeStamp = new TimeStampManager();
+    }
+
     /* //日期转换为时间戳 */
     public String shortTimeToStamp(String timers) {
         try {
