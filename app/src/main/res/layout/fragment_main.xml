@@ -31,18 +31,27 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@id/mainTitle"
-        android:id="@+id/mainListView"
+    <com.gc.iphonemaxplan.diyView.ReboundScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/mainButton"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/mainTitle"
+        android:layout_above="@id/mainButton">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mainListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/mainButton">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </com.gc.iphonemaxplan.diyView.ReboundScrollView>
 
     <LinearLayout
-        android:layout_above="@id/AllMoneys"
         android:id="@+id/mainButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/AllMoneys"
         android:gravity="center">
 
         <Button
@@ -64,10 +73,10 @@
     </LinearLayout>
 
     <TextView
-        android:layout_alignParentBottom="true"
         android:id="@+id/AllMoneys"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
         android:gravity="center"
         android:textSize="20sp" />
 
