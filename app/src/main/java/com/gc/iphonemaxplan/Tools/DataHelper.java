@@ -54,7 +54,7 @@ public class DataHelper extends SQLiteOpenHelper {
         return dataName;
     }
 
-    public void insertinto(String DATA_NAME, String MONEY_NAME) {
+    public void insertInto(String DATA_NAME, String MONEY_NAME) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("insert into " + TABLE_NAME + " values ('" + DATA_NAME + "','" + MONEY_NAME + "');");
         db.close();

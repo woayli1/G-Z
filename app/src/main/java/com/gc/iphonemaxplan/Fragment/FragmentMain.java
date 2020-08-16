@@ -56,7 +56,7 @@ public class FragmentMain extends BaseFragment {
                 Log.d(TAG, "今天没吃");
                 String temp = String.valueOf(new Date().getTime()).substring(0, 10) + "000";
                 if (cheakExist(temp)) {
-                    MainActivity.dataHelper.insertinto(temp, "+30");
+                    MainActivity.dataHelper.insertInto(temp, "+30");
                     Refresh();
                 } else {
                     showMessage("今天已经记录啦~");
@@ -70,7 +70,7 @@ public class FragmentMain extends BaseFragment {
                 Log.d(TAG, "今天吃了");
                 String temp2 = String.valueOf(new Date().getTime()).substring(0, 10) + "000";
                 if (cheakExist(temp2)) {
-                    MainActivity.dataHelper.insertinto(temp2, "-90");
+                    MainActivity.dataHelper.insertInto(temp2, "-90");
                     Refresh();
                 } else {
                     showMessage("今天已经记录啦~");

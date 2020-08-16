@@ -7,6 +7,13 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_above="@id/bottomView"
+        android:background="@color/colorSilver" />
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/mainViewPager"
         android:layout_width="match_parent"
@@ -15,53 +22,15 @@
 
     </androidx.viewpager.widget.ViewPager>
 
-    <TextView
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_above="@id/bottomButton"
-        android:background="@color/colorSilver" />
-
-    <LinearLayout
-        android:id="@+id/bottomButton"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorWhite"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/colorWhite"
-            android:onClick="mainClick"
-            android:text="@string/main"
-            android:textColor="@color/colorSilver"
-            android:textSize="15dp" />
-
-        <Button
-            android:id="@+id/rules"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/colorWhite"
-            android:onClick="mainClick"
-            android:text="@string/rules"
-            android:textColor="@color/colorSilver"
-            android:textSize="15dp" />
-
-        <Button
-            android:id="@+id/about"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/colorWhite"
-            android:onClick="mainClick"
-            android:text="@string/about"
-            android:textColor="@color/colorSilver"
-            android:textSize="15dp" />
-    </LinearLayout>
+        app:itemTextAppearanceActive="@style/bottom_selected_text"
+        app:itemTextAppearanceInactive="@style/bottom_normal_text"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/navigation" />
 
 </RelativeLayout>

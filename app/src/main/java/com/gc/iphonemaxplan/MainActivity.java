@@ -1,10 +1,8 @@
 package com.gc.iphonemaxplan;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
-import android.widget.Button;
+import android.view.MenuItem;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.gc.iphonemaxplan.Fragment.FragmentAbout;
@@ -12,21 +10,21 @@ import com.gc.iphonemaxplan.Fragment.FragmentMain;
 import com.gc.iphonemaxplan.Fragment.FragmentRules;
 import com.gc.iphonemaxplan.Fragment.MainAdapter;
 import com.gc.iphonemaxplan.Tools.DataHelper;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
 
-public class MainActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
+public class MainActivity extends FragmentActivity {
 
     private ViewPager mainViewpager;
-    private Button main;
-    private Button rules;
-    private Button about;
+    private BottomNavigationView bottomView;
 
     public static DataHelper dataHelper;
 
@@ -49,21 +47,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 
         bindView();
         initFragment();
+        initEvent();
 
-    }
-
-    public void mainClick(View v) {
-        switch (v.getId()) {
-            case R.id.main:
-                mainViewpager.setCurrentItem(0);
-                break;
-            case R.id.rules:
-                mainViewpager.setCurrentItem(1);
-                break;
-            case R.id.about:
-                mainViewpager.setCurrentItem(2);
-                break;
-        }
     }
 
     private void initFragment() {
@@ -79,53 +64,59 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
         MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager(), 0, frameLayoutList);
         mainViewpager.setAdapter(mainAdapter);
         mainViewpager.setCurrentItem(0);
-        mainViewpager.addOnPageChangeListener(this);
-        main.setTextColor(getResources().getColor(R.color.colorBlock));
+        mainViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                bottomView.getMenu().getItem(position).setChecked(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
-    @Override
-    public void onPageScrolled(int i, float v, int i1) {
+    private void initEvent() {
+        bottomView.setItemIconTintList(null);
+        bottomView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                boolean result = false;
 
-    }
+                switch (item.getItemId()) {
+                    case R.id.nav_item_main:
+                        mainViewpager.setCurrentItem(0);
+                        result = true;
+                        break;
+                    case R.id.nav_item_rules:
+                        mainViewpager.setCurrentItem(1);
+                        result = true;
+                        break;
+                    case R.id.nav_item_about:
+                        mainViewpager.setCurrentItem(2);
+                        result = true;
+                        break;
+                }
 
-    @Override
-    public void onPageSelected(int i) {
-        switch (i) {
-            case 0:
-                main.setTextColor(getResources().getColor(R.color.colorBlock));
-                rules.setTextColor(getResources().getColor(R.color.colorSilver));
-                about.setTextColor(getResources().getColor(R.color.colorSilver));
-                break;
-            case 1:
-                main.setTextColor(getResources().getColor(R.color.colorSilver));
-                rules.setTextColor(getResources().getColor(R.color.colorBlock));
-                about.setTextColor(getResources().getColor(R.color.colorSilver));
-                break;
-            case 2:
-                main.setTextColor(getResources().getColor(R.color.colorSilver));
-                rules.setTextColor(getResources().getColor(R.color.colorSilver));
-                about.setTextColor(getResources().getColor(R.color.colorBlock));
-                break;
-        }
-
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int i) {
-
+                return result;
+            }
+        });
     }
 
     private void bindView() {
-        main = this.findViewById(R.id.main);
-        rules = this.findViewById(R.id.rules);
-        about = this.findViewById(R.id.about);
         mainViewpager = this.findViewById(R.id.mainViewPager);
+        bottomView = this.findViewById(R.id.bottomView);
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Log.d(TAG, "返回键:按下了返回键");
             exit();
             return false;
         }
