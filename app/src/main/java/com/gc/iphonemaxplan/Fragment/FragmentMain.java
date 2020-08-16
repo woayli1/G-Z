@@ -9,13 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.gc.iphonemaxplan.MainActivity;
 import com.gc.iphonemaxplan.R;
 import com.gc.iphonemaxplan.Tools.TimeStampManager;
+import com.gc.iphonemaxplan.base.BaseFragment;
 import com.gc.iphonemaxplan.bean.BaseBean;
 
 import java.util.ArrayList;
@@ -24,11 +24,10 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class FragmentMain extends Fragment {
+public class FragmentMain extends BaseFragment {
 
     private View view;
 
@@ -42,8 +41,6 @@ public class FragmentMain extends Fragment {
     private List<String> data;
     private List<String> money;
     private List<Integer> AllMoneysList;
-
-    private String TAG = "FragmentMain";
 
     @Nullable
     @Override
@@ -62,7 +59,7 @@ public class FragmentMain extends Fragment {
                     MainActivity.dataHelper.insertinto(temp, "+30");
                     Refresh();
                 } else {
-                    showmessgae("今天已经记录啦~");
+                    showMessage("今天已经记录啦~");
                 }
             }
         });
@@ -76,7 +73,7 @@ public class FragmentMain extends Fragment {
                     MainActivity.dataHelper.insertinto(temp2, "-90");
                     Refresh();
                 } else {
-                    showmessgae("今天已经记录啦~");
+                    showMessage("今天已经记录啦~");
                 }
             }
         });
@@ -169,7 +166,7 @@ public class FragmentMain extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 MainActivity.dataHelper.delete(TimeStampManager.getInstance().timeToStamp(str));
-                showmessgae("删除成功");
+                showMessage("删除成功");
                 Refresh();
                 dialog.dismiss();
             }
@@ -182,9 +179,4 @@ public class FragmentMain extends Fragment {
         noEat = view.findViewById(R.id.noEat);
         allMoneys = view.findViewById(R.id.AllMoneys);
     }
-
-    public void showmessgae(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-    }
-
 }

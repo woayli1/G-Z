@@ -1,19 +1,18 @@
 package com.gc.iphonemaxplan;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.gc.iphonemaxplan.Fragment.FragmentAbout;
 import com.gc.iphonemaxplan.Fragment.FragmentMain;
 import com.gc.iphonemaxplan.Fragment.FragmentRules;
 import com.gc.iphonemaxplan.Fragment.MainAdapter;
 import com.gc.iphonemaxplan.Tools.DataHelper;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +41,14 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 
         dataHelper = new DataHelper(this, "Record", null, 1);
 
+        ImmersionBar.with(this)
+                .statusBarDarkFont(true)
+                .fitsSystemWindows(true)
+                .navigationBarColor(R.color.colorWhite)
+                .init();
+
         bindView();
-        initView();
+        initFragment();
 
     }
 
@@ -61,7 +66,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
         }
     }
 
-    private void initView() {
+    private void initFragment() {
 
         FragmentMain fragmentMain = new FragmentMain();
         FragmentRules fragmentRules = new FragmentRules();
@@ -71,10 +76,10 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
         frameLayoutList.add(fragmentRules);
         frameLayoutList.add(fragmentAbout);
 
-        MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager(), frameLayoutList);
+        MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager(), 0, frameLayoutList);
         mainViewpager.setAdapter(mainAdapter);
         mainViewpager.setCurrentItem(0);
-        mainViewpager.setOnPageChangeListener(this);
+        mainViewpager.addOnPageChangeListener(this);
         main.setTextColor(getResources().getColor(R.color.colorBlock));
 
     }
@@ -118,18 +123,6 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
         mainViewpager = this.findViewById(R.id.mainViewPager);
     }
 
-
-    private static boolean isExit = false;
-
-    Handler mHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            isExit = false;
-        }
-    };
-
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             Log.d(TAG, "返回键:按下了返回键");
@@ -139,16 +132,15 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
         return super.onKeyDown(keyCode, event);
     }
 
+    private long clickTime = 0; //记录第一次点击的时间
+
     private void exit() {
-        if (!isExit) {
-            isExit = true;
-            Toast.makeText(getApplicationContext(), "再按一次退出程序",
-                    Toast.LENGTH_SHORT).show();
-            // 利用handler延迟发送更改状态信息
-            mHandler.sendEmptyMessageDelayed(0, 2000);
+        if ((System.currentTimeMillis() - clickTime) > 2000) {
+            ToastUtils.showShort("再按一次退出");
+            clickTime = System.currentTimeMillis();
         } else {
             finish();
-            System.exit(0);
+            ToastUtils.cancel();
         }
     }
 

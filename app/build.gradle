@@ -30,4 +30,13 @@ dependencies {
     // 数据适配器
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
 
+    // 沉浸式状态栏
+    api 'com.gyf.immersionbar:immersionbar:3.0.0'
+
+    // 数据管理 hawk sp本地缓存
+    api "com.orhanobut:hawk:2.0.1"
+
+    // 工具类
+    api 'com.blankj:utilcodex:1.29.0'
+
 }
