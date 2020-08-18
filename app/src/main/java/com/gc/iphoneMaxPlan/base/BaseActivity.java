@@ -1,4 +1,4 @@
-package com.gc.iphonemaxplan.base;
+package com.gc.iphoneMaxPlan.base;
 
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -8,9 +8,9 @@ import android.view.InflateException;
 import android.view.WindowManager;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.gc.iphonemaxplan.R;
-import com.gc.iphonemaxplan.base.ibase.IBaseActivity;
-import com.gc.iphonemaxplan.base.ibase.IBaseContract;
+import com.gc.iphoneMaxPlan.R;
+import com.gc.iphoneMaxPlan.base.ibase.IBaseActivity;
+import com.gc.iphoneMaxPlan.base.ibase.IBaseContract;
 import com.gyf.immersionbar.ImmersionBar;
 
 import androidx.annotation.Nullable;

@@ -1,4 +1,4 @@
-package com.gc.iphonemaxplan.diyView;
+package com.gc.iphoneMaxPlan.diyView;
 
 import android.content.Context;
 import android.graphics.Rect;

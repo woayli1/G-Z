@@ -1,4 +1,4 @@
-package com.gc.iphonemaxplan.Tools;
+package com.gc.iphoneMaxPlan.util;
 
 import android.util.Log;
 

@@ -1,17 +1,17 @@
-package com.gc.iphonemaxplan;
+package com.gc.iphoneMaxPlan.main.ui.activity;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.view.WindowManager;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.gc.iphonemaxplan.Fragment.FragmentAbout;
-import com.gc.iphonemaxplan.Fragment.FragmentMain;
-import com.gc.iphonemaxplan.Fragment.FragmentRules;
-import com.gc.iphonemaxplan.Fragment.MainAdapter;
-import com.gc.iphonemaxplan.Tools.DataHelper;
-import com.gc.iphonemaxplan.base.BaseActivity;
+import com.gc.iphoneMaxPlan.R;
+import com.gc.iphoneMaxPlan.main.ui.fragment.FragmentAbout;
+import com.gc.iphoneMaxPlan.main.ui.fragment.FragmentMain;
+import com.gc.iphoneMaxPlan.main.ui.fragment.FragmentRules;
+import com.gc.iphoneMaxPlan.main.adapter.MainAdapter;
+import com.gc.iphoneMaxPlan.util.DataHelper;
+import com.gc.iphoneMaxPlan.base.BaseActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -41,9 +41,7 @@ public class MainActivity extends BaseActivity {
     public void initView() {
         setEnableImmersion(true);
         setStatusBarDarkFont(true);
-        setStatusBarColor(R.color.colorWhite2);
-
-        dataHelper = new DataHelper(this, "Record", null, 1);
+        setStatusBarColor(R.color.colorBackgroundWhite);
 
         initFragment();
         initEvent();
@@ -51,7 +49,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-
+        dataHelper = new DataHelper(this, "Record", null, 1);
     }
 
     private void initFragment() {

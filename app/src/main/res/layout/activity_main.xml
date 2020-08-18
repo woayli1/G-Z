@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".main.ui.activity.MainActivity">
 
     <TextView
         android:id="@+id/line"
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/line"
-        android:background="@color/colorWhite2">
+        android:background="@color/colorBackgroundWhite">
 
     </androidx.viewpager.widget.ViewPager>
 

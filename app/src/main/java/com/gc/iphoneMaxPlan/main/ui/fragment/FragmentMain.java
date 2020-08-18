@@ -1,4 +1,4 @@
-package com.gc.iphonemaxplan.Fragment;
+package com.gc.iphoneMaxPlan.main.ui.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,12 +9,13 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.gc.iphonemaxplan.MainActivity;
-import com.gc.iphonemaxplan.R;
-import com.gc.iphonemaxplan.Tools.TimeStampManager;
-import com.gc.iphonemaxplan.base.BaseFragment;
-import com.gc.iphonemaxplan.base.ibase.IBaseContract;
-import com.gc.iphonemaxplan.bean.BaseBean;
+import com.gc.iphoneMaxPlan.main.ui.activity.MainActivity;
+import com.gc.iphoneMaxPlan.R;
+import com.gc.iphoneMaxPlan.util.TimeStampManager;
+import com.gc.iphoneMaxPlan.main.adapter.ListAdapter;
+import com.gc.iphoneMaxPlan.base.BaseFragment;
+import com.gc.iphoneMaxPlan.base.ibase.IBaseContract;
+import com.gc.iphoneMaxPlan.main.bean.BaseBean;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -173,7 +174,7 @@ public class FragmentMain extends BaseFragment {
 
     public void dialog(final String str) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("确认删除吗？");
+        builder.setMessage("确认删除记录吗？");
         builder.setTitle(str);
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override

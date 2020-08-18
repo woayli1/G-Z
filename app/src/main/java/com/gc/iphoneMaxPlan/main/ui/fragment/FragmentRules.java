@@ -1,10 +1,10 @@
-package com.gc.iphonemaxplan.Fragment;
+package com.gc.iphoneMaxPlan.main.ui.fragment;
 
 import android.view.View;
 
-import com.gc.iphonemaxplan.R;
-import com.gc.iphonemaxplan.base.BaseFragment;
-import com.gc.iphonemaxplan.base.ibase.IBaseContract;
+import com.gc.iphoneMaxPlan.R;
+import com.gc.iphoneMaxPlan.base.BaseFragment;
+import com.gc.iphoneMaxPlan.base.ibase.IBaseContract;
 
 import androidx.annotation.Nullable;
 

@@ -1,4 +1,4 @@
-package com.gc.iphonemaxplan.bean;
+package com.gc.iphoneMaxPlan.main.bean;
 
 public class BaseBean {
 

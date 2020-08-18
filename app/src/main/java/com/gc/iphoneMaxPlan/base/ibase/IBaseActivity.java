@@ -1,4 +1,4 @@
-package com.gc.iphonemaxplan.base.ibase;
+package com.gc.iphoneMaxPlan.base.ibase;
 
 import android.app.Activity;
 import android.os.Bundle;

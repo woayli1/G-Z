@@ -1,4 +1,4 @@
-package com.gc.iphonemaxplan;
+package com.gc.iphoneMaxPlan;
 
 import org.junit.Test;
 

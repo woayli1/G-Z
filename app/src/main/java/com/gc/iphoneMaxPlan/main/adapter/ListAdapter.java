@@ -1,10 +1,10 @@
-package com.gc.iphonemaxplan.Fragment;
+package com.gc.iphoneMaxPlan.main.adapter;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.gc.iphonemaxplan.R;
-import com.gc.iphonemaxplan.Tools.TimeStampManager;
-import com.gc.iphonemaxplan.bean.BaseBean;
+import com.gc.iphoneMaxPlan.R;
+import com.gc.iphoneMaxPlan.util.TimeStampManager;
+import com.gc.iphoneMaxPlan.main.bean.BaseBean;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

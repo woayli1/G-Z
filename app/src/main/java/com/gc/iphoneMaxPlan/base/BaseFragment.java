@@ -1,4 +1,4 @@
-package com.gc.iphonemaxplan.base;
+package com.gc.iphoneMaxPlan.base;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.gc.iphonemaxplan.base.ibase.IBaseContract;
-import com.gc.iphonemaxplan.base.ibase.IBaseFragment;
+import com.gc.iphoneMaxPlan.base.ibase.IBaseContract;
+import com.gc.iphoneMaxPlan.base.ibase.IBaseFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

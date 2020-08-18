@@ -1,4 +1,4 @@
-package com.gc.iphonemaxplan.Fragment;
+package com.gc.iphoneMaxPlan.main.adapter;
 
 import java.util.List;
 

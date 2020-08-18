@@ -1,4 +1,4 @@
-package com.gc.iphonemaxplan.base.ibase;
+package com.gc.iphoneMaxPlan.base.ibase;
 
 
 public interface IBaseModel {
