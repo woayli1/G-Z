@@ -1,23 +1,37 @@
 package com.gc.iphonemaxplan.Fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+
 import com.gc.iphonemaxplan.R;
 import com.gc.iphonemaxplan.base.BaseFragment;
+import com.gc.iphonemaxplan.base.ibase.IBaseContract;
 
 import androidx.annotation.Nullable;
 
 public class FragmentRules extends BaseFragment {
 
-    private View view;
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_rules, container, false);
+    protected int attachLayoutId() {
+        return R.layout.fragment_rules;
+    }
 
-        return view;
+    @Override
+    protected IBaseContract.IBasePresenter getPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initView(View view) {
+
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void setData(@Nullable Object data) {
+
     }
 }

@@ -1,38 +1,44 @@
 package com.gc.iphonemaxplan.Fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.gc.iphonemaxplan.R;
 import com.gc.iphonemaxplan.base.BaseFragment;
+import com.gc.iphonemaxplan.base.ibase.IBaseContract;
 
 import androidx.annotation.Nullable;
+import butterknife.BindView;
 
 public class FragmentAbout extends BaseFragment {
 
-    private View view;
+    @BindView(R.id.fragmentAbout)
+    TextView fragmentAbout;
 
-    private TextView fragmentAbout;
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragmen_about, container, false);
+    protected int attachLayoutId() {
+        return R.layout.fragmen_about;
+    }
 
-        bindView();
+    @Override
+    protected IBaseContract.IBasePresenter getPresenter() {
+        return null;
+    }
 
+    @Override
+    public void initView(View view) {
         //设置版本号
         fragmentAbout.setText(String.format(getResources().getString(R.string.FragmentAbout_current_version), AppUtils.getAppVersionName()));
-
-        return view;
     }
 
-    private void bindView() {
-        fragmentAbout = view.findViewById(R.id.fragmentAbout);
+    @Override
+    public void initData() {
+
     }
 
+    @Override
+    public void setData(@Nullable Object data) {
+
+    }
 }

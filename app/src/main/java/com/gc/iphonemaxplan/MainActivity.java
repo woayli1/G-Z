@@ -3,6 +3,7 @@ package com.gc.iphonemaxplan;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.gc.iphonemaxplan.Fragment.FragmentAbout;
@@ -10,48 +11,52 @@ import com.gc.iphonemaxplan.Fragment.FragmentMain;
 import com.gc.iphonemaxplan.Fragment.FragmentRules;
 import com.gc.iphonemaxplan.Fragment.MainAdapter;
 import com.gc.iphonemaxplan.Tools.DataHelper;
+import com.gc.iphonemaxplan.base.BaseActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.ViewPager;
+import butterknife.BindView;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends BaseActivity {
 
-    private ViewPager mainViewpager;
-    private BottomNavigationView bottomView;
+    @BindView(R.id.mainViewPager)
+    ViewPager mainViewPager;
+    @BindView(R.id.bottomView)
+    BottomNavigationView bottomView;
 
     public static DataHelper dataHelper;
 
-    private List<Fragment> frameLayoutList = new ArrayList<>();
-
-    private String TAG = "MainActivity";
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void initView() {
+        setEnableImmersion(true);
+        setStatusBarDarkFont(true);
+        setStatusBarColor(R.color.colorWhite2);
 
         dataHelper = new DataHelper(this, "Record", null, 1);
 
-        ImmersionBar.with(this)
-                .statusBarDarkFont(true)
-                .fitsSystemWindows(true)
-                .navigationBarColor(R.color.colorWhite)
-                .init();
-
-        bindView();
         initFragment();
         initEvent();
+    }
+
+    @Override
+    public void initData(@Nullable Bundle savedInstanceState) {
 
     }
 
     private void initFragment() {
+
+        List<Fragment> frameLayoutList = new ArrayList<>();
 
         FragmentMain fragmentMain = new FragmentMain();
         FragmentRules fragmentRules = new FragmentRules();
@@ -62,9 +67,9 @@ public class MainActivity extends FragmentActivity {
         frameLayoutList.add(fragmentAbout);
 
         MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager(), 0, frameLayoutList);
-        mainViewpager.setAdapter(mainAdapter);
-        mainViewpager.setCurrentItem(0);
-        mainViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mainViewPager.setAdapter(mainAdapter);
+        mainViewPager.setCurrentItem(0);
+        mainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -92,15 +97,15 @@ public class MainActivity extends FragmentActivity {
 
                 switch (item.getItemId()) {
                     case R.id.nav_item_main:
-                        mainViewpager.setCurrentItem(0);
+                        mainViewPager.setCurrentItem(0);
                         result = true;
                         break;
                     case R.id.nav_item_rules:
-                        mainViewpager.setCurrentItem(1);
+                        mainViewPager.setCurrentItem(1);
                         result = true;
                         break;
                     case R.id.nav_item_about:
-                        mainViewpager.setCurrentItem(2);
+                        mainViewPager.setCurrentItem(2);
                         result = true;
                         break;
                 }
@@ -108,11 +113,6 @@ public class MainActivity extends FragmentActivity {
                 return result;
             }
         });
-    }
-
-    private void bindView() {
-        mainViewpager = this.findViewById(R.id.mainViewPager);
-        bottomView = this.findViewById(R.id.bottomView);
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -134,5 +134,4 @@ public class MainActivity extends FragmentActivity {
             ToastUtils.cancel();
         }
     }
-
 }

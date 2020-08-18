@@ -2,11 +2,8 @@ package com.gc.iphonemaxplan.Fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -16,6 +13,7 @@ import com.gc.iphonemaxplan.MainActivity;
 import com.gc.iphonemaxplan.R;
 import com.gc.iphonemaxplan.Tools.TimeStampManager;
 import com.gc.iphonemaxplan.base.BaseFragment;
+import com.gc.iphonemaxplan.base.ibase.IBaseContract;
 import com.gc.iphonemaxplan.bean.BaseBean;
 
 import java.util.ArrayList;
@@ -26,28 +24,34 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
 
 public class FragmentMain extends BaseFragment {
 
-    private View view;
-
-    private RecyclerView recyclerView; //界面数据容器
-    private Button eat;
-    private Button noEat;
-    private TextView allMoneys;
-
+    @BindView(R.id.mainListView)
+    RecyclerView mainListView;
+    @BindView(R.id.eat)
+    Button eat;
+    @BindView(R.id.noEat)
+    Button noEat;
+    @BindView(R.id.AllMoneys)
+    TextView AllMoneys;
 
     private List<BaseBean> baseBean;
-    private List<String> data;
-    private List<String> money;
-    private List<Integer> AllMoneysList;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_main, container, false);
+    protected int attachLayoutId() {
+        return R.layout.fragment_main;
+    }
 
-        bindView();
+    @Override
+    protected IBaseContract.IBasePresenter getPresenter() {
+        return null;
+    }
+
+    @Override
+    public void initView(View view) {
+
         Refresh();
 
         noEat.setOnClickListener(new View.OnClickListener() {
@@ -78,31 +82,40 @@ public class FragmentMain extends BaseFragment {
             }
         });
 
-        return view;
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void setData(@Nullable Object data) {
+
     }
 
     private void Refresh() {
 
         baseBean = new ArrayList<>();
-        AllMoneysList = new ArrayList<>();
-        data = new ArrayList<>();
-        money = new ArrayList<>();
+        List<Integer> allMoneysList = new ArrayList<>();
+        List<String> data = new ArrayList<>();
+        List<String> money = new ArrayList<>();
 
         int length = MainActivity.dataHelper.getAllItem("data_name").size();
 
         for (int i = 0; i < length; i++) {
             data.add(MainActivity.dataHelper.getAllItem("data_name").get(i));
             money.add(MainActivity.dataHelper.getAllItem("money_name").get(i));
-            countAllMoney(AllMoneysList, MainActivity.dataHelper.getAllItem("money_name").get(length - 1 - i));
+            countAllMoney(allMoneysList, MainActivity.dataHelper.getAllItem("money_name").get(length - 1 - i));
         }
 
         for (int j = 0; j < data.size(); j++) {
-            baseBean.add(new BaseBean(data.get(j), money.get(j), AllMoneysList.get(AllMoneysList.size() - 1 - j)));
+            baseBean.add(new BaseBean(data.get(j), money.get(j), allMoneysList.get(allMoneysList.size() - 1 - j)));
         }
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mainListView.setLayoutManager(new LinearLayoutManager(getContext()));
         ListAdapter listAdapter = new ListAdapter(baseBean);
-        recyclerView.setAdapter(listAdapter);
+        mainListView.setAdapter(listAdapter);
 
         listAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -112,10 +125,10 @@ public class FragmentMain extends BaseFragment {
             }
         });
 
-        if (AllMoneysList.size() <= 0) {
-            allMoneys.setText(String.format(getResources().getString(R.string.FragmentAbout_current_money), "0"));
+        if (allMoneysList.size() <= 0) {
+            AllMoneys.setText(String.format(getResources().getString(R.string.FragmentAbout_current_money), "0"));
         } else {
-            allMoneys.setText(String.format(getResources().getString(R.string.FragmentAbout_current_money), AllMoneysList.get(AllMoneysList.size() - 1).toString()));
+            AllMoneys.setText(String.format(getResources().getString(R.string.FragmentAbout_current_money), allMoneysList.get(allMoneysList.size() - 1).toString()));
         }
 
     }
@@ -171,12 +184,5 @@ public class FragmentMain extends BaseFragment {
                 dialog.dismiss();
             }
         }).setNegativeButton("取消", null).show();
-    }
-
-    private void bindView() {
-        recyclerView = view.findViewById(R.id.mainListView);
-        eat = view.findViewById(R.id.eat);
-        noEat = view.findViewById(R.id.noEat);
-        allMoneys = view.findViewById(R.id.AllMoneys);
     }
 }

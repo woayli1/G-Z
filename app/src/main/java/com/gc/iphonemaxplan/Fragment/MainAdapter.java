@@ -12,9 +12,9 @@ public class MainAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragmentList;
 
     /**
-     * @param fm
-     * @param behavior
-     * @param fragmentList
+     * @param fm  FragmentManager
+     * @param behavior  behavior
+     * @param fragmentList  fragmentList
      */
     public MainAdapter(FragmentManager fm, int behavior, List<Fragment> fragmentList) {
         super(fm, behavior);
