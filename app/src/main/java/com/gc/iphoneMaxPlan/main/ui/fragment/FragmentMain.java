@@ -1,14 +1,11 @@
 package com.gc.iphoneMaxPlan.main.ui.fragment;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.gc.iphoneMaxPlan.main.ui.activity.MainActivity;
 import com.gc.iphoneMaxPlan.R;
 import com.gc.iphoneMaxPlan.util.TimeStampManager;
@@ -21,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,31 +51,25 @@ public class FragmentMain extends BaseFragment {
 
         Refresh();
 
-        noEat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "今天没吃");
-                String temp = String.valueOf(new Date().getTime()).substring(0, 10) + "000";
-                if (cheakExist(temp)) {
-                    MainActivity.dataHelper.insertInto(temp, "+30");
-                    Refresh();
-                } else {
-                    showMessage("今天已经记录啦~");
-                }
+        noEat.setOnClickListener(v -> {
+            Log.d(TAG, "今天没吃");
+            String temp = String.valueOf(new Date().getTime()).substring(0, 10) + "000";
+            if (checkExist(temp)) {
+                MainActivity.dataHelper.insertInto(temp, "+30");
+                Refresh();
+            } else {
+                showMessage("今天已经记录啦~");
             }
         });
 
-        eat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "今天吃了");
-                String temp2 = String.valueOf(new Date().getTime()).substring(0, 10) + "000";
-                if (cheakExist(temp2)) {
-                    MainActivity.dataHelper.insertInto(temp2, "-90");
-                    Refresh();
-                } else {
-                    showMessage("今天已经记录啦~");
-                }
+        eat.setOnClickListener(v -> {
+            Log.d(TAG, "今天吃了");
+            String temp2 = String.valueOf(new Date().getTime()).substring(0, 10) + "000";
+            if (checkExist(temp2)) {
+                MainActivity.dataHelper.insertInto(temp2, "-90");
+                Refresh();
+            } else {
+                showMessage("今天已经记录啦~");
             }
         });
 
@@ -118,12 +108,9 @@ public class FragmentMain extends BaseFragment {
         ListAdapter listAdapter = new ListAdapter(baseBean);
         mainListView.setAdapter(listAdapter);
 
-        listAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                TextView textView = view.findViewById(R.id.data);
-                dialog(textView.getText().toString());
-            }
+        listAdapter.setOnItemClickListener((adapter, view, position) -> {
+            TextView textView = view.findViewById(R.id.data);
+            dialog(textView.getText().toString());
         });
 
         if (allMoneysList.size() <= 0) {
@@ -152,7 +139,7 @@ public class FragmentMain extends BaseFragment {
         items.add(a);
     }
 
-    public boolean cheakExist(String value) {
+    public boolean checkExist(String value) {
         long temp, temp2;
         try {
             String str = baseBean.get(0).getData();
@@ -176,14 +163,11 @@ public class FragmentMain extends BaseFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("确认删除记录吗？");
         builder.setTitle(str);
-        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                MainActivity.dataHelper.delete(TimeStampManager.getInstance().timeToStamp(str));
-                showMessage("删除成功");
-                Refresh();
-                dialog.dismiss();
-            }
+        builder.setPositiveButton("确认", (dialog, which) -> {
+            MainActivity.dataHelper.delete(TimeStampManager.getInstance().timeToStamp(str));
+            showMessage("删除成功");
+            Refresh();
+            dialog.dismiss();
         }).setNegativeButton("取消", null).show();
     }
 }

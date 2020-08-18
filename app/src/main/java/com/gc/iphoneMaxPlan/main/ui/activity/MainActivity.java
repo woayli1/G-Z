@@ -2,35 +2,37 @@ package com.gc.iphoneMaxPlan.main.ui.activity;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.gc.iphoneMaxPlan.R;
+import com.gc.iphoneMaxPlan.base.BaseActivity;
+import com.gc.iphoneMaxPlan.main.adapter.MainAdapter;
 import com.gc.iphoneMaxPlan.main.ui.fragment.FragmentAbout;
 import com.gc.iphoneMaxPlan.main.ui.fragment.FragmentMain;
 import com.gc.iphoneMaxPlan.main.ui.fragment.FragmentRules;
-import com.gc.iphoneMaxPlan.main.adapter.MainAdapter;
 import com.gc.iphoneMaxPlan.util.DataHelper;
-import com.gc.iphoneMaxPlan.base.BaseActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity {
 
+    @BindView(R.id.line)
+    TextView line;
     @BindView(R.id.mainViewPager)
     ViewPager mainViewPager;
     @BindView(R.id.bottomView)
     BottomNavigationView bottomView;
 
     public static DataHelper dataHelper;
+
+    private float moveX;
+    private float moveY;
+    private float pressX;
+    private float pressY;
 
     @Override
     public int getLayoutId() {
@@ -54,17 +56,12 @@ public class MainActivity extends BaseActivity {
 
     private void initFragment() {
 
-        List<Fragment> frameLayoutList = new ArrayList<>();
+        MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager(), 0);
 
-        FragmentMain fragmentMain = new FragmentMain();
-        FragmentRules fragmentRules = new FragmentRules();
-        FragmentAbout fragmentAbout = new FragmentAbout();
+        mainAdapter.addFragment(new FragmentMain());
+        mainAdapter.addFragment(new FragmentRules());
+        mainAdapter.addFragment(new FragmentAbout());
 
-        frameLayoutList.add(fragmentMain);
-        frameLayoutList.add(fragmentRules);
-        frameLayoutList.add(fragmentAbout);
-
-        MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager(), 0, frameLayoutList);
         mainViewPager.setAdapter(mainAdapter);
         mainViewPager.setCurrentItem(0);
         mainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -88,29 +85,28 @@ public class MainActivity extends BaseActivity {
 
     private void initEvent() {
         bottomView.setItemIconTintList(null);
-        bottomView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                boolean result = false;
+        bottomView.setOnNavigationItemSelectedListener(item -> {
 
-                switch (item.getItemId()) {
-                    case R.id.nav_item_main:
-                        mainViewPager.setCurrentItem(0);
-                        result = true;
-                        break;
-                    case R.id.nav_item_rules:
-                        mainViewPager.setCurrentItem(1);
-                        result = true;
-                        break;
-                    case R.id.nav_item_about:
-                        mainViewPager.setCurrentItem(2);
-                        result = true;
-                        break;
-                }
+            boolean result = false;
 
-                return result;
+            switch (item.getItemId()) {
+                case R.id.nav_item_main:
+                    mainViewPager.setCurrentItem(0);
+                    result = true;
+                    break;
+                case R.id.nav_item_rules:
+                    mainViewPager.setCurrentItem(1);
+                    result = true;
+                    break;
+                case R.id.nav_item_about:
+                    mainViewPager.setCurrentItem(2);
+                    result = true;
+                    break;
             }
+
+            return result;
         });
+
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {

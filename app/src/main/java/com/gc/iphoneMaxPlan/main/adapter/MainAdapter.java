@@ -1,5 +1,6 @@
 package com.gc.iphoneMaxPlan.main.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -9,17 +10,14 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class MainAdapter extends FragmentPagerAdapter {
 
-    private List<Fragment> fragmentList;
+    private List<Fragment> fragmentList = new ArrayList<>();
 
     /**
-     * @param fm  FragmentManager
-     * @param behavior  behavior
-     * @param fragmentList  fragmentList
+     * @param fm       FragmentManager
+     * @param behavior behavior
      */
-    public MainAdapter(FragmentManager fm, int behavior, List<Fragment> fragmentList) {
+    public MainAdapter(FragmentManager fm, int behavior) {
         super(fm, behavior);
-
-        this.fragmentList = fragmentList;
     }
 
     @NonNull
@@ -31,5 +29,9 @@ public class MainAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return fragmentList.size();
+    }
+
+    public void addFragment(Fragment fragment) {
+        fragmentList.add(fragment);
     }
 }
