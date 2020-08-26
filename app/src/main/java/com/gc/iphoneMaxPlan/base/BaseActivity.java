@@ -83,18 +83,11 @@ public abstract class BaseActivity<P extends IBaseContract.IBasePresenter> exten
             return;
         }
 
-        int orientation = getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            mImmersionBar.reset()
-                    .fitsSystemWindows(true)
-                    .statusBarColor(statusBarColor)
-                    .statusBarDarkFont(statusBarDarkFont)
-                    .init();
-        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            mImmersionBar.reset()
-                    .fullScreen(true)
-                    .init();
-        }
+        mImmersionBar.reset()
+                .fitsSystemWindows(true)
+                .statusBarColor(statusBarColor)
+                .statusBarDarkFont(statusBarDarkFont)
+                .init();
     }
 
     /**
