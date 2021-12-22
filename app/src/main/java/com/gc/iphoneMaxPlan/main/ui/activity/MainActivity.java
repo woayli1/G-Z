@@ -2,6 +2,7 @@ package com.gc.iphoneMaxPlan.main.ui.activity;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -13,9 +14,12 @@ import com.gc.iphoneMaxPlan.main.ui.fragment.FragmentMain;
 import com.gc.iphoneMaxPlan.main.ui.fragment.FragmentRules;
 import com.gc.iphoneMaxPlan.util.DataHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
+
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity {
@@ -23,16 +27,11 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.line)
     TextView line;
     @BindView(R.id.mainViewPager)
-    ViewPager mainViewPager;
+    ViewPager2 mainViewPager;
     @BindView(R.id.bottomView)
     BottomNavigationView bottomView;
 
     public static DataHelper dataHelper;
-
-    private float moveX;
-    private float moveY;
-    private float pressX;
-    private float pressY;
 
     @Override
     public int getLayoutId() {
@@ -56,7 +55,7 @@ public class MainActivity extends BaseActivity {
 
     private void initFragment() {
 
-        MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager(), 0);
+        MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager(), getLifecycle());
 
         mainAdapter.addFragment(new FragmentMain());
         mainAdapter.addFragment(new FragmentRules());
@@ -64,20 +63,11 @@ public class MainActivity extends BaseActivity {
 
         mainViewPager.setAdapter(mainAdapter);
         mainViewPager.setCurrentItem(0);
-        mainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
+        mainViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
+                super.onPageSelected(position);
                 bottomView.getMenu().getItem(position).setChecked(true);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
             }
         });
 
@@ -85,26 +75,23 @@ public class MainActivity extends BaseActivity {
 
     private void initEvent() {
         bottomView.setItemIconTintList(null);
-        bottomView.setOnNavigationItemSelectedListener(item -> {
-
-            boolean result = false;
-
-            switch (item.getItemId()) {
-                case R.id.nav_item_main:
+        bottomView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                boolean result = false;
+                int resId = item.getItemId();
+                if (resId == R.id.nav_item_main) {
                     mainViewPager.setCurrentItem(0);
                     result = true;
-                    break;
-                case R.id.nav_item_rules:
+                } else if (resId == R.id.nav_item_rules) {
                     mainViewPager.setCurrentItem(1);
                     result = true;
-                    break;
-                case R.id.nav_item_about:
+                } else if (resId == R.id.nav_item_about) {
                     mainViewPager.setCurrentItem(2);
                     result = true;
-                    break;
+                }
+                return result;
             }
-
-            return result;
         });
 
     }

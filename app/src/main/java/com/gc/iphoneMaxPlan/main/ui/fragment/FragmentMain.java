@@ -129,9 +129,9 @@ public class FragmentMain extends BaseFragment {
             a = items.get(items.size() - 1);
         }
 
-        if (money.substring(0, 1).equals("-")) {
+        if (money.charAt(0) == '-') {
             a = a - 90;
-        } else if (money.substring(0, 1).equals("+")) {
+        } else if (money.charAt(0) == '+') {
             a = a + 30;
         } else {
             a = 0;
