@@ -31,11 +31,11 @@
 
     </LinearLayout>
 
-    <com.gc.iphoneMaxPlan.diyView.ReboundScrollView
+    <com.woayli1.iphoneMaxPlan.diyView.ReboundScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/mainTitle"
-        android:layout_above="@id/mainButton">
+        android:layout_above="@id/mainButton"
+        android:layout_below="@id/mainTitle">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mainListView"
@@ -45,7 +45,7 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-    </com.gc.iphoneMaxPlan.diyView.ReboundScrollView>
+    </com.woayli1.iphoneMaxPlan.diyView.ReboundScrollView>
 
     <LinearLayout
         android:id="@+id/mainButton"
