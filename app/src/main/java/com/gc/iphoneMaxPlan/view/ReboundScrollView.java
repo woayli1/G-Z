@@ -1,4 +1,4 @@
-package com.woayli1.iphoneMaxPlan.diyView;
+package com.gc.iphoneMaxPlan.view;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -15,7 +15,7 @@ public class ReboundScrollView extends ScrollView {
     private boolean mEnableBottomRebound = true;
     private OnReboundEndListener mOnReboundEndListener;
     private View mContentView;
-    private Rect mRect = new Rect();
+    private final Rect mRect = new Rect();
 
     public ReboundScrollView(Context context) {
         super(context);
@@ -49,7 +49,6 @@ public class ReboundScrollView extends ScrollView {
     public ReboundScrollView setOnReboundEndListener(OnReboundEndListener onReboundEndListener) {
         this.mOnReboundEndListener = onReboundEndListener;
         return this;
-
     }
 
     public ReboundScrollView setEnableTopRebound(boolean enableTopRebound) {

@@ -3,13 +3,17 @@
 buildscript {
 
     repositories {
+        google()
+        mavenCentral()
         maven { url "https://jcenter.bintray.com" }
+        maven { url "https://maven.aliyun.com/repository/public" }
         maven { url "https://maven.aliyun.com/repository/google" }
         maven { url "https://maven.aliyun.com/repository/central" }
-        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath "com.android.tools.build:gradle:8.5.2"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.3"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -18,15 +22,17 @@ buildscript {
 
 allprojects {
     repositories {
+        google()
+        mavenCentral()
         maven { url "https://jcenter.bintray.com" }
+        maven { url "https://maven.aliyun.com/repository/public" }
         maven { url "https://maven.aliyun.com/repository/google" }
         maven { url "https://maven.aliyun.com/repository/central" }
-        maven { url "https://maven.aliyun.com/repository/public" }
         //github
         maven { url 'https://jitpack.io' }
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register('clean', Delete) {
+    delete rootProject.layout.buildDirectory
 }

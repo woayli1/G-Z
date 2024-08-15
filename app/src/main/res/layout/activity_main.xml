@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".main.ui.activity.MainActivity">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/line"
@@ -31,7 +30,7 @@
         android:background="@color/colorWhite"
         app:itemTextAppearanceActive="@style/bottom_selected_text"
         app:itemTextAppearanceInactive="@style/bottom_normal_text"
-        app:labelVisibilityMode="labeled"
+        app:labelVisibilityMode="auto"
         app:menu="@menu/navigation" />
 
 </RelativeLayout>

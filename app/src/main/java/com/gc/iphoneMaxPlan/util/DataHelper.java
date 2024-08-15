@@ -1,4 +1,4 @@
-package com.woayli1.iphoneMaxPlan.util;
+package com.gc.iphoneMaxPlan.util;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,15 +9,12 @@ import java.util.ArrayList;
 
 public class DataHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "Record";
-    private static final int DATABASE_VERSION = 1;
-
     private static final String TABLE_NAME = "table_name";
     private static final String DATA_NAME = "data_name";
     private static final String MONEY_NAME = "money_name";
 
     public DataHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+        super(context, name, factory, version);
     }
 
     @Override
@@ -32,14 +29,14 @@ public class DataHelper extends SQLiteOpenHelper {
 
     public ArrayList<String> getAllItem(String items) {
         SQLiteDatabase db = getReadableDatabase();
-        ArrayList<String> itme = new ArrayList<>();
+        ArrayList<String> item = new ArrayList<>();
         Cursor cursor = db.rawQuery("SELECT * FROM '" + TABLE_NAME + "' order by data_name DESC;", null);
         while (cursor.moveToNext()) {
-            itme.add(cursor.getString(Math.max(cursor.getColumnIndex(items), 0)));
+            item.add(cursor.getString(Math.max(cursor.getColumnIndex(items), 0)));
         }
         cursor.close();
         db.close();
-        return itme;
+        return item;
     }
 
     public String getDataName(String temp) {
